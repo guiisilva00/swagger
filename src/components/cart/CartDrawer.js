@@ -76,7 +76,7 @@ export default function CartDrawer() {
           ) : (
             <ul>
               {items.map((item) => (
-                <CartLineItem key={item.id} item={item} />
+                <CartLineItem key={`${item.id}-${item.size ?? ""}`} item={item} />
               ))}
             </ul>
           )}

@@ -24,6 +24,9 @@ export default function CartLineItem({ item }) {
         <p className="line-clamp-2 text-sm font-medium text-foreground">
           {item.title}
         </p>
+        {item.size && (
+          <p className="text-xs text-muted">Tamanho: {item.size}</p>
+        )}
         <p className="text-sm text-muted">
           {formatPrice(item.price)}
           {item.quantity > 1 && (
@@ -35,7 +38,7 @@ export default function CartLineItem({ item }) {
           <QuantityStepper
             size="sm"
             value={item.quantity}
-            onChange={(quantity) => setQuantity(item.id, quantity)}
+            onChange={(quantity) => setQuantity(item.id, item.size, quantity)}
           />
 
           <div className="flex items-center gap-3">
@@ -44,7 +47,7 @@ export default function CartLineItem({ item }) {
             </span>
             <button
               type="button"
-              onClick={() => removeItem(item.id)}
+              onClick={() => removeItem(item.id, item.size)}
               className="text-xs uppercase tracking-wide text-muted underline-offset-4 hover:text-foreground hover:underline"
             >
               Remover

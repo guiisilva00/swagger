@@ -12,16 +12,20 @@ function normalizeQuantity(quantity) {
   return Math.min(MAX_QUANTITY, Math.max(1, value));
 }
 
+function sameLine(item, id, size) {
+  return item.id === id && item.size === size;
+}
+
 function reducer(items, action) {
   switch (action.type) {
     case "ADD_ITEM": {
-      const { product, quantity = 1 } = action;
+      const { product, quantity = 1, size = null } = action;
       const addedQuantity = normalizeQuantity(quantity);
-      const existing = items.find((item) => item.id === product.id);
+      const existing = items.find((item) => sameLine(item, product.id, size));
 
       if (existing) {
         return items.map((item) =>
-          item.id === product.id
+          sameLine(item, product.id, size)
             ? {
                 ...item,
                 quantity: normalizeQuantity(item.quantity + addedQuantity),
@@ -38,22 +42,25 @@ function reducer(items, action) {
           price: product.price,
           image: product.image,
           quantity: addedQuantity,
+          size,
         },
       ];
     }
 
     case "REMOVE_ITEM":
-      return items.filter((item) => item.id !== action.id);
+      return items.filter((item) => !sameLine(item, action.id, action.size));
 
     case "SET_QUANTITY": {
       const quantity = Math.floor(Number(action.quantity));
 
       if (!Number.isFinite(quantity) || quantity <= 0) {
-        return items.filter((item) => item.id !== action.id);
+        return items.filter(
+          (item) => !sameLine(item, action.id, action.size)
+        );
       }
 
       return items.map((item) =>
-        item.id === action.id
+        sameLine(item, action.id, action.size)
           ? { ...item, quantity: normalizeQuantity(quantity) }
           : item
       );
@@ -70,16 +77,25 @@ function reducer(items, action) {
 const CartContext = createContext(null);
 
 export function CartProvider({ children, validProductIds }) {
-  const pruneStaleItems = (items) =>
-    validProductIds
-      ? items.filter((item) => validProductIds.includes(item.id))
-      : items;
+  const normalizeHydrated = (items) => {
+    // Items saved before size support existed have no `size` key at all
+    // (`undefined`), which would no longer match the `null` used for
+    // sizeless products today — normalize on read so old carts keep working.
+    const normalized = items.map((item) => ({
+      ...item,
+      size: item.size ?? null,
+    }));
+
+    return validProductIds
+      ? normalized.filter((item) => validProductIds.includes(item.id))
+      : normalized;
+  };
 
   const [items, dispatch] = usePersistedReducer(
     STORAGE_KEY,
     reducer,
     [],
-    pruneStaleItems
+    normalizeHydrated
   );
   const [isOpen, setIsOpen] = useState(false);
 
@@ -97,13 +113,14 @@ export function CartProvider({ children, validProductIds }) {
       isOpen,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
-      addItem: (product, quantity = 1) => {
-        dispatch({ type: "ADD_ITEM", product, quantity });
+      addItem: (product, quantity = 1, size = null) => {
+        dispatch({ type: "ADD_ITEM", product, quantity, size });
         setIsOpen(true);
       },
-      removeItem: (id) => dispatch({ type: "REMOVE_ITEM", id }),
-      setQuantity: (id, quantity) =>
-        dispatch({ type: "SET_QUANTITY", id, quantity }),
+      removeItem: (id, size = null) =>
+        dispatch({ type: "REMOVE_ITEM", id, size }),
+      setQuantity: (id, size, quantity) =>
+        dispatch({ type: "SET_QUANTITY", id, size, quantity }),
       clearCart: () => dispatch({ type: "CLEAR_CART" }),
     };
   }, [items, isOpen, dispatch]);

@@ -1,4 +1,4 @@
-import { CATEGORY_LABELS, SLUG_TO_CATEGORY } from "@/lib/format";
+import { CATEGORY_LABELS, SLUG_TO_CATEGORY, formatPrice } from "@/lib/format";
 
 export const SORT_OPTIONS = [
   { value: "relevancia", label: "Relevância" },
@@ -97,10 +97,10 @@ export function describeActiveFilters(searchParams) {
   if (precoMin || precoMax) {
     const label =
       precoMin && precoMax
-        ? `$${precoMin} – $${precoMax}`
+        ? `${formatPrice(Number(precoMin))} – ${formatPrice(Number(precoMax))}`
         : precoMin
-          ? `A partir de $${precoMin}`
-          : `Até $${precoMax}`;
+          ? `A partir de ${formatPrice(Number(precoMin))}`
+          : `Até ${formatPrice(Number(precoMax))}`;
     chips.push({
       key: "preco",
       label,

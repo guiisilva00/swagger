@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getProduct, getProducts } from "@/services/api";
 import { categoryLabel, categorySlug } from "@/lib/format";
 import Breadcrumbs from "@/components/products/Breadcrumbs";
+import ProductGallery from "@/components/products/ProductGallery";
 import PurchaseActions from "@/components/products/PurchaseActions";
 import RelatedProducts from "@/components/products/RelatedProducts";
 import PriceTag from "@/components/ui/PriceTag";
@@ -70,7 +70,7 @@ export default async function ProductPage({ params }) {
     category: categoryLabel(product.category),
     offers: {
       "@type": "Offer",
-      priceCurrency: "USD",
+      priceCurrency: "BRL",
       price: product.price,
     },
     ...(product.rating && {
@@ -115,16 +115,7 @@ export default async function ProductPage({ params }) {
         </Link>
 
         <div className="mt-6 grid grid-cols-1 gap-12 md:grid-cols-2">
-          <div className="group relative aspect-square overflow-hidden rounded-md border border-border bg-surface">
-            <Image
-              src={product.image}
-              alt={product.title}
-              fill
-              priority
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-contain p-10 transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
+          <ProductGallery images={[product.image]} title={product.title} />
 
           <div className="flex flex-col">
             <p className="text-xs uppercase tracking-wide text-muted">

@@ -5,6 +5,7 @@ import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { CartProvider } from "@/context/CartContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 import { getProducts } from "@/services/api";
@@ -64,6 +65,7 @@ export default async function RootLayout({ children }) {
               <main className="flex flex-1 flex-col">{children}</main>
               <Footer />
               <CartDrawer />
+              <WhatsAppButton />
             </FavoritesProvider>
           </CartProvider>
         </ThemeProvider>

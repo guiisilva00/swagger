@@ -29,7 +29,10 @@ export function isStoreCategory(category) {
 }
 
 export function formatPrice(value) {
-  return `$${value.toFixed(2)}`;
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(value);
 }
 
 /**

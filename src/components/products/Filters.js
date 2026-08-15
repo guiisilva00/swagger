@@ -99,30 +99,40 @@ export default function Filters({ onApply }) {
           <label className="sr-only" htmlFor="precoMin">
             Preço mínimo
           </label>
-          <input
-            id="precoMin"
-            type="number"
-            min="0"
-            inputMode="decimal"
-            placeholder="Mín."
-            value={precoMin}
-            onChange={(event) => setPrecoMin(event.target.value)}
-            className="h-10 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
-          />
+          <div className="relative w-full">
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-subtle">
+              R$
+            </span>
+            <input
+              id="precoMin"
+              type="number"
+              min="0"
+              inputMode="decimal"
+              placeholder="Mín."
+              value={precoMin}
+              onChange={(event) => setPrecoMin(event.target.value)}
+              className="h-10 w-full rounded-md border border-border bg-surface py-2 pl-9 pr-3 text-sm text-foreground placeholder:text-muted focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
+            />
+          </div>
           <span className="text-subtle">–</span>
           <label className="sr-only" htmlFor="precoMax">
             Preço máximo
           </label>
-          <input
-            id="precoMax"
-            type="number"
-            min="0"
-            inputMode="decimal"
-            placeholder="Máx."
-            value={precoMax}
-            onChange={(event) => setPrecoMax(event.target.value)}
-            className="h-10 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
-          />
+          <div className="relative w-full">
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-subtle">
+              R$
+            </span>
+            <input
+              id="precoMax"
+              type="number"
+              min="0"
+              inputMode="decimal"
+              placeholder="Máx."
+              value={precoMax}
+              onChange={(event) => setPrecoMax(event.target.value)}
+              className="h-10 w-full rounded-md border border-border bg-surface py-2 pl-9 pr-3 text-sm text-foreground placeholder:text-muted focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
+            />
+          </div>
         </div>
         <button
           type="submit"
