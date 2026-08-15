@@ -1,11 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProduct } from "@/services/api";
+import { getProduct, getProducts } from "@/services/api";
 import { categoryLabel } from "@/lib/format";
 import AddToCartButton from "@/components/products/AddToCartButton";
 import FavoriteButton from "@/components/products/FavoriteButton";
 import PriceTag from "@/components/ui/PriceTag";
+
+export async function generateStaticParams() {
+  const products = await getProducts();
+
+  return products.map((product) => ({
+    id: String(product.id),
+  }));
+}
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
