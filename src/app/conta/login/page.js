@@ -1,0 +1,77 @@
+import Link from "next/link";
+import Button from "@/components/ui/Button";
+
+export const metadata = {
+  title: "Entrar",
+  description: "Acesse sua conta SWAGGER.",
+};
+
+export default function LoginPage() {
+  return (
+    <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-6 py-16 sm:px-8">
+      <p className="text-xs uppercase tracking-wide text-zinc-500">
+        Bem-vindo de volta
+      </p>
+      <h1 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50">
+        Entrar
+      </h1>
+
+      <form className="mt-8 flex flex-col gap-4">
+        <div>
+          <label
+            htmlFor="email"
+            className="mb-1 block text-xs uppercase tracking-wide text-zinc-500"
+          >
+            E-mail
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            className="h-11 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 text-sm text-zinc-50 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="password"
+            className="mb-1 block text-xs uppercase tracking-wide text-zinc-500"
+          >
+            Senha
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            className="h-11 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 text-sm text-zinc-50 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+          />
+        </div>
+
+        <Button
+          as="button"
+          type="submit"
+          disabled
+          variant="primary"
+          className="mt-2 w-full"
+          title="Autenticação ainda não disponível nesta demo"
+        >
+          Entrar
+        </Button>
+        <p className="text-center text-xs text-zinc-600">
+          Autenticação ainda não disponível nesta demo.
+        </p>
+      </form>
+
+      <p className="mt-6 text-center text-sm text-zinc-500">
+        Não tem conta?{" "}
+        <Link
+          href="/conta/cadastro"
+          className="text-zinc-50 underline-offset-4 hover:underline"
+        >
+          Criar conta
+        </Link>
+      </p>
+    </div>
+  );
+}

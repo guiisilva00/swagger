@@ -1,0 +1,93 @@
+"use client";
+
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import Nav from "./Nav";
+import SearchBar from "./SearchBar";
+
+export default function MobileMenu({ open, onClose }) {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    onClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") onClose();
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  return (
+    <div
+      aria-hidden={!open}
+      className={`fixed inset-0 z-50 md:hidden ${
+        open ? "" : "pointer-events-none"
+      }`}
+    >
+      <div
+        onClick={onClose}
+        className={`absolute inset-0 bg-black/60 transition-opacity ${
+          open ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        className={`absolute left-0 top-0 flex h-full w-full max-w-xs flex-col gap-8 border-r border-zinc-800 bg-zinc-950 p-6 transition-transform duration-300 ${
+          open ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="text-lg font-semibold uppercase tracking-[0.2em] text-zinc-50"
+          >
+            SWAGGER
+          </Link>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Fechar menu"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-zinc-400 hover:bg-zinc-900 hover:text-zinc-50"
+          >
+            ✕
+          </button>
+        </div>
+
+        <SearchBar />
+
+        <Nav className="flex flex-col items-start gap-5" />
+
+        <div className="mt-auto flex flex-col gap-3 border-t border-zinc-800 pt-6">
+          <Link
+            href="/favoritos"
+            className="text-sm uppercase tracking-wide text-zinc-300 hover:text-zinc-50"
+          >
+            Favoritos
+          </Link>
+          <Link
+            href="/conta"
+            className="text-sm uppercase tracking-wide text-zinc-300 hover:text-zinc-50"
+          >
+            Minha Conta
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
