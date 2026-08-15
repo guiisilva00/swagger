@@ -1,50 +1,35 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useReducer } from "react";
-import { readLocalStorage, writeLocalStorage } from "@/lib/storage";
+import { createContext, useContext, useMemo } from "react";
+import { usePersistedReducer } from "@/hooks/usePersistedReducer";
 
 const STORAGE_KEY = "swagger:favorites";
 
-const FavoritesContext = createContext(null);
-
-function reducer(state, action) {
+function reducer(ids, action) {
   switch (action.type) {
-    case "HYDRATE":
-      return { ids: action.ids };
-
     case "TOGGLE": {
-      const exists = state.ids.includes(action.id);
-      return {
-        ids: exists
-          ? state.ids.filter((id) => id !== action.id)
-          : [...state.ids, action.id],
-      };
+      const exists = ids.includes(action.id);
+      return exists ? ids.filter((id) => id !== action.id) : [...ids, action.id];
     }
 
     default:
-      return state;
+      return ids;
   }
 }
 
+const FavoritesContext = createContext(null);
+
 export function FavoritesProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, { ids: [] });
-
-  useEffect(() => {
-    dispatch({ type: "HYDRATE", ids: readLocalStorage(STORAGE_KEY, []) });
-  }, []);
-
-  useEffect(() => {
-    writeLocalStorage(STORAGE_KEY, state.ids);
-  }, [state.ids]);
+  const [ids, dispatch] = usePersistedReducer(STORAGE_KEY, reducer, []);
 
   const value = useMemo(
     () => ({
-      ids: state.ids,
-      count: state.ids.length,
-      isFavorite: (id) => state.ids.includes(id),
+      ids,
+      count: ids.length,
+      isFavorite: (id) => ids.includes(id),
       toggleFavorite: (id) => dispatch({ type: "TOGGLE", id }),
     }),
-    [state.ids]
+    [ids, dispatch]
   );
 
   return (

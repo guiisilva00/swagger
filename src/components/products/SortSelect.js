@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { SORT_OPTIONS } from "@/lib/filters";
+import { SORT_OPTIONS, buildFilterHref } from "@/lib/filters";
 
 export default function SortSelect() {
   const router = useRouter();
@@ -10,16 +10,12 @@ export default function SortSelect() {
   const current = searchParams.get("ordenar") ?? "relevancia";
 
   function handleChange(event) {
-    const params = new URLSearchParams(searchParams.toString());
     const value = event.target.value;
-
-    if (value === "relevancia") {
-      params.delete("ordenar");
-    } else {
-      params.set("ordenar", value);
-    }
-
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(
+      buildFilterHref(pathname, searchParams, {
+        ordenar: value === "relevancia" ? null : value,
+      })
+    );
   }
 
   return (

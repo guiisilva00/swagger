@@ -1,10 +1,8 @@
 import Link from "next/link";
 
 const LINKS = [
-  { label: "Novidades", disabled: true },
   { label: "Masculino", href: "/produtos?categoria=masculino" },
   { label: "Feminino", href: "/produtos?categoria=feminino" },
-  { label: "Calçados", disabled: true },
   { label: "Acessórios", href: "/produtos?categoria=acessorios" },
 ];
 

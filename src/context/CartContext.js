@@ -1,103 +1,99 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useReducer,
-  useState,
-} from "react";
-import { readLocalStorage, writeLocalStorage } from "@/lib/storage";
+import { createContext, useContext, useMemo, useState } from "react";
+import { usePersistedReducer } from "@/hooks/usePersistedReducer";
 
 const STORAGE_KEY = "swagger:cart";
+const MAX_QUANTITY = 99;
 
-const CartContext = createContext(null);
+function normalizeQuantity(quantity) {
+  const value = Math.floor(Number(quantity));
+  if (!Number.isFinite(value)) return 1;
+  return Math.min(MAX_QUANTITY, Math.max(1, value));
+}
 
-function reducer(state, action) {
+function reducer(items, action) {
   switch (action.type) {
-    case "HYDRATE":
-      return { items: action.items };
-
     case "ADD_ITEM": {
       const { product, quantity = 1 } = action;
-      const existing = state.items.find((item) => item.id === product.id);
+      const addedQuantity = normalizeQuantity(quantity);
+      const existing = items.find((item) => item.id === product.id);
 
       if (existing) {
-        return {
-          items: state.items.map((item) =>
-            item.id === product.id
-              ? { ...item, quantity: item.quantity + quantity }
-              : item
-          ),
-        };
+        return items.map((item) =>
+          item.id === product.id
+            ? {
+                ...item,
+                quantity: normalizeQuantity(item.quantity + addedQuantity),
+              }
+            : item
+        );
       }
 
-      return {
-        items: [
-          ...state.items,
-          {
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            image: product.image,
-            quantity,
-          },
-        ],
-      };
+      return [
+        ...items,
+        {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          image: product.image,
+          quantity: addedQuantity,
+        },
+      ];
     }
 
     case "REMOVE_ITEM":
-      return { items: state.items.filter((item) => item.id !== action.id) };
+      return items.filter((item) => item.id !== action.id);
 
     case "SET_QUANTITY": {
-      if (action.quantity <= 0) {
-        return { items: state.items.filter((item) => item.id !== action.id) };
+      const quantity = Math.floor(Number(action.quantity));
+
+      if (!Number.isFinite(quantity) || quantity <= 0) {
+        return items.filter((item) => item.id !== action.id);
       }
 
-      return {
-        items: state.items.map((item) =>
-          item.id === action.id
-            ? { ...item, quantity: action.quantity }
-            : item
-        ),
-      };
+      return items.map((item) =>
+        item.id === action.id
+          ? { ...item, quantity: normalizeQuantity(quantity) }
+          : item
+      );
     }
 
     case "CLEAR_CART":
-      return { items: [] };
+      return [];
 
     default:
-      return state;
+      return items;
   }
 }
 
-export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, { items: [] });
+const CartContext = createContext(null);
+
+export function CartProvider({ children, validProductIds }) {
+  const pruneStaleItems = (items) =>
+    validProductIds
+      ? items.filter((item) => validProductIds.includes(item.id))
+      : items;
+
+  const [items, dispatch] = usePersistedReducer(
+    STORAGE_KEY,
+    reducer,
+    [],
+    pruneStaleItems
+  );
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    dispatch({ type: "HYDRATE", items: readLocalStorage(STORAGE_KEY, []) });
-  }, []);
-
-  useEffect(() => {
-    writeLocalStorage(STORAGE_KEY, state.items);
-  }, [state.items]);
-
   const value = useMemo(() => {
-    const itemCount = state.items.reduce(
-      (sum, item) => sum + item.quantity,
-      0
-    );
-    const subtotal = state.items.reduce(
+    const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+    const total = items.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
     );
 
     return {
-      items: state.items,
+      items,
       itemCount,
-      subtotal,
+      total,
       isOpen,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
@@ -110,7 +106,7 @@ export function CartProvider({ children }) {
         dispatch({ type: "SET_QUANTITY", id, quantity }),
       clearCart: () => dispatch({ type: "CLEAR_CART" }),
     };
-  }, [state.items, isOpen]);
+  }, [items, isOpen, dispatch]);
 
   return (
     <CartContext.Provider value={value}>{children}</CartContext.Provider>

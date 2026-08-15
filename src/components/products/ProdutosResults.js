@@ -6,6 +6,7 @@ import ProductGrid from "@/components/products/ProductGrid";
 import Filters from "@/components/products/Filters";
 import FilterDrawer from "@/components/products/FilterDrawer";
 import SortSelect from "@/components/products/SortSelect";
+import ActiveFilters from "@/components/products/ActiveFilters";
 import EmptyState from "@/components/ui/EmptyState";
 import Button from "@/components/ui/Button";
 
@@ -41,6 +42,8 @@ export default function ProdutosResults({ products }) {
           <SortSelect />
         </div>
       </div>
+
+      <ActiveFilters />
 
       <div className="grid grid-cols-1 gap-10 md:grid-cols-[220px_1fr]">
         <aside className="hidden md:block">

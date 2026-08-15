@@ -39,7 +39,9 @@ export default function FavoriteButton({ productId, className = "" }) {
         active ? "text-zinc-50" : "text-zinc-400"
       } ${className}`}
     >
-      <HeartIcon filled={active} />
+      <span key={active} className="inline-flex animate-pulse-scale">
+        <HeartIcon filled={active} />
+      </span>
     </button>
   );
 }

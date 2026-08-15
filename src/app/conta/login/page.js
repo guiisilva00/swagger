@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import AuthNotice from "@/components/account/AuthNotice";
 
 export const metadata = {
   title: "Entrar",
@@ -58,10 +59,12 @@ export default function LoginPage() {
         >
           Entrar
         </Button>
-        <p className="text-center text-xs text-zinc-600">
-          Autenticação ainda não disponível nesta demo.
-        </p>
       </form>
+
+      <AuthNotice>
+        Este formulário ainda não está conectado a um backend de
+        autenticação — nada é enviado ou salvo.
+      </AuthNotice>
 
       <p className="mt-6 text-center text-sm text-zinc-500">
         Não tem conta?{" "}

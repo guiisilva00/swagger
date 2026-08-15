@@ -36,7 +36,12 @@ export default function CartIcon() {
     >
       <BagIcon />
       {itemCount > 0 && (
-        <Badge className="absolute -right-1 -top-1">{itemCount}</Badge>
+        <Badge
+          key={itemCount}
+          className="absolute -right-1 -top-1 animate-pulse-scale"
+        >
+          {itemCount}
+        </Badge>
       )}
     </button>
   );

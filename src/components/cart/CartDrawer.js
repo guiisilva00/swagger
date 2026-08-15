@@ -8,7 +8,7 @@ import Button from "@/components/ui/Button";
 import { formatPrice } from "@/lib/format";
 
 export default function CartDrawer() {
-  const { items, subtotal, isOpen, closeCart } = useCart();
+  const { items, total, isOpen, closeCart } = useCart();
   const panelRef = useRef(null);
 
   useEffect(() => {
@@ -84,9 +84,9 @@ export default function CartDrawer() {
         {items.length > 0 && (
           <div className="border-t border-zinc-800 px-6 py-5">
             <div className="mb-4 flex items-center justify-between text-sm">
-              <span className="text-zinc-400">Subtotal</span>
+              <span className="text-zinc-400">Total</span>
               <span className="text-base font-semibold text-zinc-50">
-                {formatPrice(subtotal)}
+                {formatPrice(total)}
               </span>
             </div>
             <Button

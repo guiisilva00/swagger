@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { ALLOWED_CATEGORIES, CATEGORY_LABELS, categorySlug } from "@/lib/format";
+import { buildFilterHref } from "@/lib/filters";
 
 const CATEGORY_OPTIONS = [
   { slug: "", label: "Todos" },
@@ -18,21 +19,34 @@ export default function Filters({ onApply }) {
   const searchParams = useSearchParams();
 
   const currentCategoria = searchParams.get("categoria") ?? "";
-  const [precoMin, setPrecoMin] = useState(searchParams.get("precoMin") ?? "");
-  const [precoMax, setPrecoMax] = useState(searchParams.get("precoMax") ?? "");
+  const urlPrecoMin = searchParams.get("precoMin") ?? "";
+  const urlPrecoMax = searchParams.get("precoMax") ?? "";
+
+  const [priceInputs, setPriceInputs] = useState({
+    min: urlPrecoMin,
+    max: urlPrecoMax,
+    syncedWith: `${urlPrecoMin}|${urlPrecoMax}`,
+  });
+
+  // Keep the (editable) local inputs in sync when the URL's price filter
+  // changes from outside this form — e.g. a chip removed in ActiveFilters.
+  if (priceInputs.syncedWith !== `${urlPrecoMin}|${urlPrecoMax}`) {
+    setPriceInputs({
+      min: urlPrecoMin,
+      max: urlPrecoMax,
+      syncedWith: `${urlPrecoMin}|${urlPrecoMax}`,
+    });
+  }
+
+  const precoMin = priceInputs.min;
+  const precoMax = priceInputs.max;
+  const setPrecoMin = (value) =>
+    setPriceInputs((prev) => ({ ...prev, min: value }));
+  const setPrecoMax = (value) =>
+    setPriceInputs((prev) => ({ ...prev, max: value }));
 
   function updateParams(updates) {
-    const params = new URLSearchParams(searchParams.toString());
-
-    Object.entries(updates).forEach(([key, value]) => {
-      if (value) {
-        params.set(key, value);
-      } else {
-        params.delete(key);
-      }
-    });
-
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(buildFilterHref(pathname, searchParams, updates));
     onApply?.();
   }
 

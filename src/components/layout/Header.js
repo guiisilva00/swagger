@@ -64,7 +64,7 @@ function UserIcon() {
   );
 }
 
-export default function Header() {
+export default function Header({ searchIndex = [] }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { count } = useFavorites();
@@ -110,7 +110,10 @@ export default function Header() {
           <Nav className="hidden items-center gap-8 md:flex" />
 
           <div className="flex items-center gap-1">
-            <SearchBar className="hidden w-48 lg:block" />
+            <SearchBar
+              className="hidden w-48 lg:block"
+              products={searchIndex}
+            />
 
             <Link
               href="/favoritos"
@@ -121,7 +124,12 @@ export default function Header() {
             >
               <HeartOutlineIcon />
               {count > 0 && (
-                <Badge className="absolute -right-1 -top-1">{count}</Badge>
+                <Badge
+                  key={count}
+                  className="absolute -right-1 -top-1 animate-pulse-scale"
+                >
+                  {count}
+                </Badge>
               )}
             </Link>
 
@@ -138,7 +146,11 @@ export default function Header() {
         </div>
       </header>
 
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        searchIndex={searchIndex}
+      />
     </>
   );
 }

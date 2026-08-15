@@ -6,7 +6,7 @@ import Link from "next/link";
 import Nav from "./Nav";
 import SearchBar from "./SearchBar";
 
-export default function MobileMenu({ open, onClose }) {
+export default function MobileMenu({ open, onClose, searchIndex = [] }) {
   const pathname = usePathname();
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function MobileMenu({ open, onClose }) {
           </button>
         </div>
 
-        <SearchBar />
+        <SearchBar products={searchIndex} />
 
         <Nav className="flex flex-col items-start gap-5" />
 

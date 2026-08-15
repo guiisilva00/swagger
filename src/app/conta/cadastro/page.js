@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import AuthNotice from "@/components/account/AuthNotice";
 
 export const metadata = {
   title: "Criar Conta",
@@ -73,10 +74,12 @@ export default function CadastroPage() {
         >
           Criar conta
         </Button>
-        <p className="text-center text-xs text-zinc-600">
-          Cadastro ainda não disponível nesta demo.
-        </p>
       </form>
+
+      <AuthNotice>
+        Este formulário ainda não está conectado a um backend de
+        autenticação — nada é enviado ou salvo.
+      </AuthNotice>
 
       <p className="mt-6 text-center text-sm text-zinc-500">
         Já tem conta?{" "}

@@ -31,3 +31,13 @@ export function isStoreCategory(category) {
 export function formatPrice(value) {
   return `$${value.toFixed(2)}`;
 }
+
+/**
+ * Placeholder for a future "Novidades" feature. The catalog snapshot has no
+ * creation date, so there's no legitimate way to say a product is new yet —
+ * this always returns false. Wire it up once a real `createdAt`/`dateAdded`
+ * field exists on the product data.
+ */
+export function isNewProduct(_product) {
+  return false;
+}

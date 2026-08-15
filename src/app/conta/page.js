@@ -36,6 +36,23 @@ export default function ContaPage() {
       >
         Ver meus favoritos
       </Link>
+
+      {/*
+        Estrutura prevista para quando houver autenticação real:
+        /conta/perfil, /conta/pedidos, /conta/enderecos. Essas rotas não
+        existem ainda (ficariam vazias sem um backend) — listadas aqui só
+        como preview do que vem a seguir.
+      */}
+      <div className="mt-4 border-t border-zinc-800 pt-6">
+        <p className="text-xs uppercase tracking-wide text-zinc-600">
+          Em breve
+        </p>
+        <ul className="mt-3 flex flex-col gap-2 text-sm text-zinc-600">
+          <li>Perfil</li>
+          <li>Meus pedidos</li>
+          <li>Endereços</li>
+        </ul>
+      </div>
     </div>
   );
 }
