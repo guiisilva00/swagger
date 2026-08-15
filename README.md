@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SWAGGER — Mini E-commerce
 
-## Getting Started
+Loja fictícia construída com Next.js (App Router), consumindo o catálogo da [Fake Store API](https://fakestoreapi.com).
 
-First, run the development server:
+🔗 **Site:** https://guiisilva00.github.io/swagger/ _(domínio próprio `swagg.com` em configuração)_
+
+## Stack
+
+- **Framework:** Next.js 16 (App Router), export estático (`output: "export"`)
+- **Linguagem:** JavaScript puro (sem TypeScript)
+- **Estilização:** Tailwind CSS
+- **Dados:** snapshot local do catálogo da Fake Store API (`src/data/products.json`)
+- **Deploy:** GitHub Actions → GitHub Pages
+
+## Funcionalidades
+
+- Listagem de produtos com filtro por categoria/preço, busca e ordenação
+- Página de detalhe do produto
+- Carrinho de compras
+- Lista de favoritos
+- Páginas de conta (login/cadastro)
+
+## Rodando localmente
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+Gera o export estático em `out/`, pronto para hospedagem estática (GitHub Pages, etc).
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+O workflow em `.github/workflows/deploy.yml` builda e publica no GitHub Pages a cada push em `main`. O catálogo de produtos vem de um snapshot local (`src/data/products.json`) em vez de buscar a Fake Store API em tempo de build, já que os runners do GitHub Actions costumam ser bloqueados (403) por ela.
