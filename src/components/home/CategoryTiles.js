@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { assetPath } from "@/lib/basePath";
 
 const TILES = [
   {
@@ -33,7 +34,7 @@ export default function CategoryTiles() {
             className="group relative flex h-64 items-end overflow-hidden rounded-md border border-border sm:h-80"
           >
             <Image
-              src={tile.image}
+              src={assetPath(tile.image)}
               alt=""
               fill
               sizes="(min-width: 640px) 33vw, 100vw"

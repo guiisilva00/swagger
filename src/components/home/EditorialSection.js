@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Button from "@/components/ui/Button";
+import { assetPath } from "@/lib/basePath";
 
 export default function EditorialSection() {
   return (
     <section className="relative flex h-[70vh] max-h-[640px] min-h-[420px] items-center overflow-hidden">
       <Image
-        src="/images/editorial/editorial-01.jpg"
+        src={assetPath("/images/editorial/editorial-01.jpg")}
         alt=""
         fill
         sizes="100vw"

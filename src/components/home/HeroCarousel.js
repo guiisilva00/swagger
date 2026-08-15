@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { assetPath } from "@/lib/basePath";
 
 const AUTOPLAY_MS = 6000;
 
@@ -56,7 +57,7 @@ export default function HeroCarousel({ slides }) {
             className="relative h-full w-full shrink-0"
           >
             <Image
-              src={slide.image}
+              src={assetPath(slide.image)}
               alt=""
               fill
               priority={slideIndex === 0}
