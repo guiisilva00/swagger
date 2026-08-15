@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
+import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
@@ -50,17 +52,21 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="pt-BR"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-50">
-        <CartProvider validProductIds={validProductIds}>
-          <FavoritesProvider>
-            <Header searchIndex={searchIndex} />
-            <main className="flex flex-1 flex-col">{children}</main>
-            <Footer />
-            <CartDrawer />
-          </FavoritesProvider>
-        </CartProvider>
+      <body className="flex min-h-full flex-col bg-background text-foreground">
+        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+          <CartProvider validProductIds={validProductIds}>
+            <FavoritesProvider>
+              <TopBar />
+              <Header searchIndex={searchIndex} />
+              <main className="flex flex-1 flex-col">{children}</main>
+              <Footer />
+              <CartDrawer />
+            </FavoritesProvider>
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

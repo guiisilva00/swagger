@@ -2,67 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Menu, Heart, User } from "lucide-react";
 import Nav from "./Nav";
 import MobileMenu from "./MobileMenu";
 import SearchBar from "./SearchBar";
+import ThemeToggle from "./ThemeToggle";
 import CartIcon from "@/components/cart/CartIcon";
 import Badge from "@/components/ui/Badge";
 import { useFavorites } from "@/context/FavoritesContext";
-
-function MenuIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="22"
-      height="22"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      aria-hidden="true"
-    >
-      <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function HeartOutlineIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="19"
-      height="19"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      aria-hidden="true"
-    >
-      <path
-        d="M12 21s-7.5-4.6-10-9.1C.5 8.7 2 5 5.6 5c2 0 3.5 1.1 4.4 2.6C10.9 6.1 12.4 5 14.4 5 18 5 19.5 8.7 22 11.9 19.5 16.4 12 21 12 21z"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function UserIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="20"
-      height="20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="8" r="3.2" />
-      <path
-        d="M4.5 20c1.4-3.6 4.4-5.5 7.5-5.5s6.1 1.9 7.5 5.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 export default function Header({ searchIndex = [] }) {
   const [scrolled, setScrolled] = useState(false);
@@ -82,8 +29,8 @@ export default function Header({ searchIndex = [] }) {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 bg-zinc-950 transition-colors ${
-          scrolled ? "border-b border-zinc-800" : "border-b border-transparent"
+        className={`sticky top-0 z-40 bg-surface/95 backdrop-blur transition-colors ${
+          scrolled ? "border-b border-border" : "border-b border-transparent"
         }`}
       >
         <div
@@ -95,14 +42,14 @@ export default function Header({ searchIndex = [] }) {
             type="button"
             onClick={() => setMobileOpen(true)}
             aria-label="Abrir menu"
-            className="flex h-10 w-10 items-center justify-center rounded-md text-zinc-50 hover:bg-zinc-900 md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-surface-2 md:hidden"
           >
-            <MenuIcon />
+            <Menu size={22} strokeWidth={1.6} aria-hidden="true" />
           </button>
 
           <Link
             href="/"
-            className="text-xl font-semibold uppercase tracking-[0.2em] text-zinc-50"
+            className="text-xl font-semibold uppercase tracking-[0.2em] text-foreground"
           >
             SWAGGER
           </Link>
@@ -120,9 +67,9 @@ export default function Header({ searchIndex = [] }) {
               aria-label={
                 count > 0 ? `Favoritos (${count})` : "Favoritos"
               }
-              className="relative hidden h-10 w-10 items-center justify-center rounded-md text-zinc-50 transition-colors hover:bg-zinc-900 sm:flex"
+              className="relative hidden h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-surface-2 sm:flex"
             >
-              <HeartOutlineIcon />
+              <Heart size={19} strokeWidth={1.6} aria-hidden="true" />
               {count > 0 && (
                 <Badge
                   key={count}
@@ -136,10 +83,12 @@ export default function Header({ searchIndex = [] }) {
             <Link
               href="/conta"
               aria-label="Minha conta"
-              className="hidden h-10 w-10 items-center justify-center rounded-md text-zinc-50 transition-colors hover:bg-zinc-900 sm:flex"
+              className="hidden h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-surface-2 sm:flex"
             >
-              <UserIcon />
+              <User size={20} strokeWidth={1.6} aria-hidden="true" />
             </Link>
+
+            <ThemeToggle className="hidden sm:flex" />
 
             <CartIcon />
           </div>

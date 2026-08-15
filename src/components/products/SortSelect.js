@@ -22,7 +22,7 @@ export default function SortSelect() {
     <div className="flex items-center gap-2">
       <label
         htmlFor="ordenar"
-        className="text-xs uppercase tracking-wide text-zinc-500"
+        className="text-xs uppercase tracking-wide text-muted"
       >
         Ordenar
       </label>
@@ -30,7 +30,7 @@ export default function SortSelect() {
         id="ordenar"
         value={current}
         onChange={handleChange}
-        className="h-10 rounded-md border border-zinc-800 bg-zinc-950 px-3 text-sm text-zinc-50 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+        className="h-10 rounded-md border border-border bg-surface px-3 text-sm text-foreground focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
       >
         {SORT_OPTIONS.map((option) => (
           <option key={option.value} value={option.value}>

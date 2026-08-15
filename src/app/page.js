@@ -1,6 +1,9 @@
 import Hero from "@/components/home/Hero";
+import BenefitsBar from "@/components/home/BenefitsBar";
 import CategoryTiles from "@/components/home/CategoryTiles";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
+import EditorialSection from "@/components/home/EditorialSection";
+import FinalCta from "@/components/home/FinalCta";
 import { getProducts } from "@/services/api";
 import { isStoreCategory } from "@/lib/format";
 
@@ -14,16 +17,14 @@ export default async function Home() {
     .sort((a, b) => b.rating.rate - a.rating.rate)
     .slice(0, 8);
 
-  const accentProducts = [
-    storeProducts.find((product) => product.category === "women's clothing"),
-    storeProducts.find((product) => product.category === "men's clothing"),
-  ].filter(Boolean);
-
   return (
     <>
-      <Hero accentProducts={accentProducts} />
+      <Hero />
+      <BenefitsBar />
       <CategoryTiles />
       <FeaturedProducts products={featured} />
+      <EditorialSection />
+      <FinalCta />
     </>
   );
 }

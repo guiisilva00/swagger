@@ -11,7 +11,7 @@ export default function PurchaseActions({ product }) {
   return (
     <div className="mt-8 flex flex-col gap-4">
       <div className="flex items-center gap-3">
-        <span className="text-xs uppercase tracking-wide text-zinc-500">
+        <span className="text-xs uppercase tracking-wide text-muted">
           Quantidade
         </span>
         <QuantityStepper value={quantity} onChange={setQuantity} />

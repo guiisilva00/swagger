@@ -69,21 +69,21 @@ export default function Filters({ onApply }) {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">
           Categoria
         </p>
         <div className="flex flex-col gap-2">
           {CATEGORY_OPTIONS.map((option) => (
             <label
               key={option.slug || "todos"}
-              className="flex items-center gap-2 text-sm text-zinc-300"
+              className="flex items-center gap-2 text-sm text-foreground"
             >
               <input
                 type="radio"
                 name="categoria"
                 checked={currentCategoria === option.slug}
                 onChange={() => handleCategoryChange(option.slug)}
-                className="h-4 w-4 border-zinc-700 accent-zinc-50"
+                className="h-4 w-4 border-border-strong accent-accent"
               />
               {option.label}
             </label>
@@ -92,7 +92,7 @@ export default function Filters({ onApply }) {
       </div>
 
       <form onSubmit={handlePriceSubmit} className="flex flex-col gap-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted">
           Preço
         </p>
         <div className="flex items-center gap-2">
@@ -107,9 +107,9 @@ export default function Filters({ onApply }) {
             placeholder="Mín."
             value={precoMin}
             onChange={(event) => setPrecoMin(event.target.value)}
-            className="h-10 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 text-sm text-zinc-50 placeholder:text-zinc-500 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+            className="h-10 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
           />
-          <span className="text-zinc-600">–</span>
+          <span className="text-subtle">–</span>
           <label className="sr-only" htmlFor="precoMax">
             Preço máximo
           </label>
@@ -121,12 +121,12 @@ export default function Filters({ onApply }) {
             placeholder="Máx."
             value={precoMax}
             onChange={(event) => setPrecoMax(event.target.value)}
-            className="h-10 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 text-sm text-zinc-50 placeholder:text-zinc-500 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+            className="h-10 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
           />
         </div>
         <button
           type="submit"
-          className="h-10 rounded-md border border-zinc-700 text-sm font-medium text-zinc-50 hover:border-zinc-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
+          className="h-10 rounded-md border border-border-strong text-sm font-medium text-foreground hover:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           Aplicar preço
         </button>
@@ -135,7 +135,7 @@ export default function Filters({ onApply }) {
       <button
         type="button"
         onClick={handleClear}
-        className="text-left text-xs uppercase tracking-wide text-zinc-500 underline-offset-4 hover:text-zinc-50 hover:underline"
+        className="text-left text-xs uppercase tracking-wide text-muted underline-offset-4 hover:text-foreground hover:underline"
       >
         Limpar filtros
       </button>

@@ -10,10 +10,10 @@ export const metadata = {
 export default function LoginPage() {
   return (
     <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-6 py-16 sm:px-8">
-      <p className="text-xs uppercase tracking-wide text-zinc-500">
+      <p className="text-xs uppercase tracking-wide text-muted">
         Bem-vindo de volta
       </p>
-      <h1 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50">
+      <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
         Entrar
       </h1>
 
@@ -21,7 +21,7 @@ export default function LoginPage() {
         <div>
           <label
             htmlFor="email"
-            className="mb-1 block text-xs uppercase tracking-wide text-zinc-500"
+            className="mb-1 block text-xs uppercase tracking-wide text-muted"
           >
             E-mail
           </label>
@@ -30,13 +30,13 @@ export default function LoginPage() {
             name="email"
             type="email"
             autoComplete="email"
-            className="h-11 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 text-sm text-zinc-50 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
           />
         </div>
         <div>
           <label
             htmlFor="password"
-            className="mb-1 block text-xs uppercase tracking-wide text-zinc-500"
+            className="mb-1 block text-xs uppercase tracking-wide text-muted"
           >
             Senha
           </label>
@@ -45,7 +45,7 @@ export default function LoginPage() {
             name="password"
             type="password"
             autoComplete="current-password"
-            className="h-11 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 text-sm text-zinc-50 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
           />
         </div>
 
@@ -66,11 +66,11 @@ export default function LoginPage() {
         autenticação — nada é enviado ou salvo.
       </AuthNotice>
 
-      <p className="mt-6 text-center text-sm text-zinc-500">
+      <p className="mt-6 text-center text-sm text-muted">
         Não tem conta?{" "}
         <Link
           href="/conta/cadastro"
-          className="text-zinc-50 underline-offset-4 hover:underline"
+          className="text-foreground underline-offset-4 hover:underline"
         >
           Criar conta
         </Link>

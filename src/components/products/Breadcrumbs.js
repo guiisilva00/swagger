@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Breadcrumbs({ items }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 text-xs text-zinc-500">
+    <nav aria-label="Breadcrumb" className="mb-6 text-xs text-muted">
       <ol className="flex flex-wrap items-center gap-1.5">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
@@ -12,14 +12,14 @@ export default function Breadcrumbs({ items }) {
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="uppercase tracking-wide transition-colors hover:text-zinc-50"
+                  className="uppercase tracking-wide transition-colors hover:text-foreground"
                 >
                   {item.label}
                 </Link>
               ) : (
                 <span
                   aria-current={isLast ? "page" : undefined}
-                  className="line-clamp-1 max-w-[16rem] uppercase tracking-wide text-zinc-300"
+                  className="line-clamp-1 max-w-[16rem] uppercase tracking-wide text-foreground"
                 >
                   {item.label}
                 </span>

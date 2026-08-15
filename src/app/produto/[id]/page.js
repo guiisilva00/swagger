@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Star } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getProduct, getProducts } from "@/services/api";
 import { categoryLabel, categorySlug } from "@/lib/format";
@@ -108,13 +109,13 @@ export default async function ProductPage({ params }) {
 
         <Link
           href="/produtos"
-          className="text-xs uppercase tracking-wide text-zinc-500 transition-colors hover:text-zinc-50"
+          className="text-xs uppercase tracking-wide text-muted transition-colors hover:text-foreground"
         >
           ← Voltar aos produtos
         </Link>
 
         <div className="mt-6 grid grid-cols-1 gap-12 md:grid-cols-2">
-          <div className="group relative aspect-square overflow-hidden rounded-md border border-zinc-800 bg-zinc-950">
+          <div className="group relative aspect-square overflow-hidden rounded-md border border-border bg-surface">
             <Image
               src={product.image}
               alt={product.title}
@@ -126,23 +127,24 @@ export default async function ProductPage({ params }) {
           </div>
 
           <div className="flex flex-col">
-            <p className="text-xs uppercase tracking-wide text-zinc-500">
+            <p className="text-xs uppercase tracking-wide text-muted">
               {categoryLabel(product.category)}
             </p>
-            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50 sm:text-3xl">
+            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
               {product.title}
             </h1>
 
             {product.rating && (
-              <p className="mt-2 text-sm text-zinc-500">
-                ★ {product.rating.rate.toFixed(1)} · {product.rating.count}{" "}
+              <p className="mt-2 flex items-center gap-1 text-sm text-muted">
+                <Star size={13} strokeWidth={1.6} fill="currentColor" aria-hidden="true" />
+                {product.rating.rate.toFixed(1)} · {product.rating.count}{" "}
                 avaliações
               </p>
             )}
 
             <PriceTag value={product.price} className="mt-4 text-3xl" />
 
-            <p className="mt-6 text-base leading-7 text-zinc-400">
+            <p className="mt-6 text-base leading-7 text-muted">
               {product.description}
             </p>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { X } from "lucide-react";
 import { buildFilterHref, describeActiveFilters } from "@/lib/filters";
 
 export default function ActiveFilters() {
@@ -20,12 +21,10 @@ export default function ActiveFilters() {
           onClick={() =>
             router.push(buildFilterHref(pathname, searchParams, chip.updates))
           }
-          className="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-950 py-1.5 pl-3 pr-2 text-xs text-zinc-300 transition-colors hover:border-zinc-500 hover:text-zinc-50"
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface py-1.5 pl-3 pr-2 text-xs text-muted transition-colors hover:border-border-strong hover:text-foreground"
         >
           {chip.label}
-          <span aria-hidden="true" className="text-zinc-500">
-            ✕
-          </span>
+          <X size={12} strokeWidth={2} aria-hidden="true" className="text-subtle" />
           <span className="sr-only">Remover filtro {chip.label}</span>
         </button>
       ))}
@@ -34,7 +33,7 @@ export default function ActiveFilters() {
         <button
           type="button"
           onClick={() => router.push(pathname)}
-          className="text-xs uppercase tracking-wide text-zinc-500 underline-offset-4 hover:text-zinc-50 hover:underline"
+          className="text-xs uppercase tracking-wide text-muted underline-offset-4 hover:text-foreground hover:underline"
         >
           Limpar tudo
         </button>

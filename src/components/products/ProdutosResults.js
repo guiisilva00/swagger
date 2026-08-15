@@ -26,13 +26,13 @@ export default function ProdutosResults({ products }) {
     <>
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-wide text-zinc-500">
+          <p className="text-xs uppercase tracking-wide text-muted">
             Coleção completa
           </p>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50 sm:text-3xl">
+          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             Produtos
           </h1>
-          <p className="mt-2 text-sm text-zinc-500">
+          <p className="mt-2 text-sm text-muted">
             {sorted.length} {sorted.length === 1 ? "produto" : "produtos"}
           </p>
         </div>

@@ -4,6 +4,7 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { Search, X } from "lucide-react";
 import { formatPrice } from "@/lib/format";
 
 const MAX_SUGGESTIONS = 5;
@@ -63,6 +64,12 @@ export default function SearchBar({ className = "", products = [] }) {
           Buscar produtos
         </label>
         <div className="relative">
+          <Search
+            size={15}
+            strokeWidth={1.8}
+            aria-hidden="true"
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle"
+          />
           <input
             id="search"
             type="search"
@@ -79,16 +86,16 @@ export default function SearchBar({ className = "", products = [] }) {
             onFocus={() => setOpen(true)}
             onBlur={() => setTimeout(() => setOpen(false), 120)}
             placeholder="Buscar produtos"
-            className="h-10 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 pr-8 text-sm text-zinc-50 placeholder:text-zinc-500 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+            className="h-10 w-full rounded-md border border-border bg-surface pl-9 pr-8 text-sm text-foreground placeholder:text-subtle focus:border-border-strong focus:outline-none focus:ring-1 focus:ring-ring"
           />
           {value && (
             <button
               type="button"
               onClick={handleClear}
               aria-label="Limpar busca"
-              className="absolute right-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center text-zinc-500 hover:text-zinc-50"
+              className="absolute right-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center text-muted hover:text-foreground"
             >
-              ✕
+              <X size={15} strokeWidth={1.8} aria-hidden="true" />
             </button>
           )}
         </div>
@@ -98,7 +105,7 @@ export default function SearchBar({ className = "", products = [] }) {
         <ul
           id={listboxId}
           role="listbox"
-          className="absolute left-0 right-0 top-full z-10 mt-2 overflow-hidden rounded-md border border-zinc-800 bg-zinc-950 shadow-lg"
+          className="absolute left-0 right-0 top-full z-10 mt-2 overflow-hidden rounded-md border border-border bg-surface shadow-lg"
         >
           {suggestions.map((product) => (
             <li key={product.id} role="option" aria-selected="false">
@@ -106,9 +113,9 @@ export default function SearchBar({ className = "", products = [] }) {
                 href={`/produto/${product.id}`}
                 onMouseDown={(event) => event.preventDefault()}
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-3 px-3 py-2 text-sm text-zinc-200 hover:bg-zinc-900"
+                className="flex items-center gap-3 px-3 py-2 text-sm text-foreground hover:bg-surface-2"
               >
-                <span className="relative h-10 w-8 shrink-0 overflow-hidden rounded border border-zinc-800 bg-zinc-950">
+                <span className="relative h-10 w-8 shrink-0 overflow-hidden rounded border border-border bg-surface">
                   <Image
                     src={product.image}
                     alt=""
@@ -118,7 +125,7 @@ export default function SearchBar({ className = "", products = [] }) {
                   />
                 </span>
                 <span className="line-clamp-1 flex-1">{product.title}</span>
-                <span className="shrink-0 text-zinc-500">
+                <span className="shrink-0 text-muted">
                   {formatPrice(product.price)}
                 </span>
               </Link>

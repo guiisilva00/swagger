@@ -15,10 +15,10 @@ export default async function FavoritosPage() {
 
   return (
     <div className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 sm:px-8">
-      <p className="text-xs uppercase tracking-wide text-zinc-500">
+      <p className="text-xs uppercase tracking-wide text-muted">
         Sua seleção
       </p>
-      <h1 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50 sm:text-3xl">
+      <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
         Favoritos
       </h1>
 

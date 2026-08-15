@@ -12,20 +12,20 @@ export default function QuantityStepper({
 
   return (
     <div
-      className={`inline-flex items-center rounded-md border border-zinc-800 ${className}`}
+      className={`inline-flex items-center rounded-md border border-border ${className}`}
     >
       <button
         type="button"
         onClick={() => onChange(Math.max(min, value - 1))}
         disabled={value <= min}
         aria-label="Diminuir quantidade"
-        className={`flex ${cell} items-center justify-center text-zinc-50 transition-colors hover:bg-zinc-900 disabled:pointer-events-none disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400`}
+        className={`flex ${cell} items-center justify-center text-foreground transition-colors hover:bg-surface-2 disabled:pointer-events-none disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring`}
       >
         −
       </button>
       <span
         aria-live="polite"
-        className={`flex ${size === "sm" ? "w-6" : "w-8"} items-center justify-center text-sm text-zinc-50`}
+        className={`flex ${size === "sm" ? "w-6" : "w-8"} items-center justify-center text-sm text-foreground`}
       >
         {value}
       </span>
@@ -34,7 +34,7 @@ export default function QuantityStepper({
         onClick={() => onChange(Math.min(max, value + 1))}
         disabled={value >= max}
         aria-label="Aumentar quantidade"
-        className={`flex ${cell} items-center justify-center text-zinc-50 transition-colors hover:bg-zinc-900 disabled:pointer-events-none disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400`}
+        className={`flex ${cell} items-center justify-center text-foreground transition-colors hover:bg-surface-2 disabled:pointer-events-none disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring`}
       >
         +
       </button>

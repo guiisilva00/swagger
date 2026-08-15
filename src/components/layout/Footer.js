@@ -22,20 +22,20 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-zinc-800">
+    <footer className="border-t border-border">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-16 sm:px-8 md:grid-cols-[2fr_1fr_1fr]">
         <div>
-          <p className="text-xl font-semibold uppercase tracking-[0.2em] text-zinc-50">
+          <p className="text-xl font-semibold uppercase tracking-[0.2em] text-foreground">
             SWAGGER
           </p>
-          <p className="mt-4 max-w-xs text-sm leading-6 text-zinc-500">
+          <p className="mt-4 max-w-xs text-sm leading-6 text-muted">
             Moda que representa você.
           </p>
         </div>
 
         {COLUMNS.map((column) => (
           <div key={column.title}>
-            <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
               {column.title}
             </p>
             <ul className="mt-4 flex flex-col gap-3">
@@ -43,7 +43,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-zinc-300 transition-colors hover:text-zinc-50"
+                    className="text-sm text-muted transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </Link>
@@ -54,7 +54,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="border-t border-zinc-800 px-6 py-6 text-center text-xs text-zinc-600 sm:px-8">
+      <div className="border-t border-border px-6 py-6 text-center text-xs text-subtle sm:px-8">
         © {new Date().getFullYear()} SWAGGER. Todos os direitos reservados.
       </div>
     </footer>

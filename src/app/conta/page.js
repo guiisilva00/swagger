@@ -10,13 +10,13 @@ export default function ContaPage() {
   return (
     <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-6 px-6 py-16 text-center sm:px-8">
       <div>
-        <p className="text-xs uppercase tracking-wide text-zinc-500">
+        <p className="text-xs uppercase tracking-wide text-muted">
           Minha conta
         </p>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50">
+        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
           Entre ou crie sua conta
         </h1>
-        <p className="mt-3 text-sm text-zinc-500">
+        <p className="mt-3 text-sm text-muted">
           Em breve você poderá acompanhar pedidos e salvar preferências.
         </p>
       </div>
@@ -32,7 +32,7 @@ export default function ContaPage() {
 
       <Link
         href="/favoritos"
-        className="text-sm text-zinc-500 underline-offset-4 hover:text-zinc-50 hover:underline"
+        className="text-sm text-muted underline-offset-4 hover:text-foreground hover:underline"
       >
         Ver meus favoritos
       </Link>
@@ -43,11 +43,11 @@ export default function ContaPage() {
         existem ainda (ficariam vazias sem um backend) — listadas aqui só
         como preview do que vem a seguir.
       */}
-      <div className="mt-4 border-t border-zinc-800 pt-6">
-        <p className="text-xs uppercase tracking-wide text-zinc-600">
+      <div className="mt-4 border-t border-border pt-6">
+        <p className="text-xs uppercase tracking-wide text-subtle">
           Em breve
         </p>
-        <ul className="mt-3 flex flex-col gap-2 text-sm text-zinc-600">
+        <ul className="mt-3 flex flex-col gap-2 text-sm text-subtle">
           <li>Perfil</li>
           <li>Meus pedidos</li>
           <li>Endereços</li>

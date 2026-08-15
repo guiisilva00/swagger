@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import CartLineItem from "./CartLineItem";
 import EmptyState from "@/components/ui/EmptyState";
@@ -35,7 +36,7 @@ export default function CartDrawer() {
     >
       <div
         onClick={closeCart}
-        className={`absolute inset-0 bg-black/60 transition-opacity ${
+        className={`absolute inset-0 bg-overlay transition-opacity ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
       />
@@ -46,21 +47,21 @@ export default function CartDrawer() {
         aria-modal="true"
         aria-label="Carrinho de compras"
         tabIndex={-1}
-        className={`absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-zinc-800 bg-zinc-950 transition-transform duration-300 focus:outline-none ${
+        className={`absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-border bg-surface transition-transform duration-300 focus:outline-none ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between border-b border-zinc-800 px-6 py-5">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-50">
+        <div className="flex items-center justify-between border-b border-border px-6 py-5">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-foreground">
             Carrinho {items.length > 0 && `(${items.length})`}
           </h2>
           <button
             type="button"
             onClick={closeCart}
             aria-label="Fechar carrinho"
-            className="flex h-9 w-9 items-center justify-center rounded-md text-zinc-400 hover:bg-zinc-900 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-subtle hover:bg-surface-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            ✕
+            <X size={18} strokeWidth={1.6} aria-hidden="true" />
           </button>
         </div>
 
@@ -82,10 +83,10 @@ export default function CartDrawer() {
         </div>
 
         {items.length > 0 && (
-          <div className="border-t border-zinc-800 px-6 py-5">
+          <div className="border-t border-border px-6 py-5">
             <div className="mb-4 flex items-center justify-between text-sm">
-              <span className="text-zinc-400">Total</span>
-              <span className="text-base font-semibold text-zinc-50">
+              <span className="text-muted">Total</span>
+              <span className="text-base font-semibold text-foreground">
                 {formatPrice(total)}
               </span>
             </div>
@@ -101,7 +102,7 @@ export default function CartDrawer() {
             <button
               type="button"
               onClick={closeCart}
-              className="mt-3 w-full text-center text-xs uppercase tracking-wide text-zinc-500 hover:text-zinc-50"
+              className="mt-3 w-full text-center text-xs uppercase tracking-wide text-muted hover:text-foreground"
             >
               Continuar comprando
             </button>

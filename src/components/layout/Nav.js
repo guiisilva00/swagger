@@ -15,7 +15,7 @@ export default function Nav({ className = "" }) {
             key={link.label}
             aria-disabled="true"
             title="Em breve"
-            className="cursor-not-allowed text-sm uppercase tracking-wide text-zinc-600"
+            className="cursor-not-allowed text-sm uppercase tracking-wide text-subtle"
           >
             {link.label}
           </span>
@@ -23,7 +23,7 @@ export default function Nav({ className = "" }) {
           <Link
             key={link.label}
             href={link.href}
-            className="text-sm uppercase tracking-wide text-zinc-300 transition-colors hover:text-zinc-50"
+            className="text-sm uppercase tracking-wide text-muted transition-colors hover:text-foreground"
           >
             {link.label}
           </Link>
