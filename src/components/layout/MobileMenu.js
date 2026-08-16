@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 import Nav from "./Nav";
 import SearchBar from "./SearchBar";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "@/components/ui/Logo";
 
 export default function MobileMenu({ open, onClose, searchIndex = [] }) {
   const pathname = usePathname();
@@ -55,12 +56,7 @@ export default function MobileMenu({ open, onClose, searchIndex = [] }) {
         }`}
       >
         <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="text-lg font-semibold uppercase tracking-[0.2em] text-foreground"
-          >
-            SWAGGER
-          </Link>
+          <Logo variant="color" width={96} />
           <button
             type="button"
             onClick={onClose}

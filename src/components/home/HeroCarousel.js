@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { assetPath } from "@/lib/basePath";
+import Button from "@/components/ui/Button";
+import HeroLogoMark from "./HeroLogoMark";
 
 const AUTOPLAY_MS = 6000;
 
@@ -43,8 +44,8 @@ export default function HeroCarousel({ slides }) {
     >
       {/*
         Full-bleed photographic background: text/controls here are
-        intentionally fixed white, not theme tokens — legibility is driven
-        by the gradient scrim over the photo, not by light/dark mode.
+        intentionally fixed white/ink, not theme tokens — legibility is
+        driven by the gradient scrim over the photo, not by light/dark mode.
       */}
       <div
         className="flex h-full transition-transform duration-700 ease-out"
@@ -62,29 +63,45 @@ export default function HeroCarousel({ slides }) {
               fill
               priority={slideIndex === 0}
               sizes="100vw"
-              className="object-cover object-[50%_18%]"
+              className="object-cover"
+              style={{ objectPosition: slide.focus ?? "50% 18%" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1B160D]/85 via-[#1B160D]/45 to-[#1B160D]/10" />
 
             <div className="relative flex h-full items-center">
               <div className="mx-auto w-full max-w-7xl px-6 sm:px-8">
-                <div className="max-w-lg">
-                  <p className="text-xs uppercase tracking-[0.3em] text-white/70">
+                <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/60">
+                  {String(slideIndex + 1).padStart(2, "0")} /{" "}
+                  {String(slides.length).padStart(2, "0")}
+                </p>
+
+                <div className="mt-6 max-w-xl">
+                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-brand-yellow">
                     {slide.eyebrow}
                   </p>
-                  <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-6xl">
+                  <h2 className="mt-3 font-display text-5xl uppercase leading-[0.95] tracking-tight text-white sm:text-7xl">
                     {slide.title}
                   </h2>
-                  <p className="mt-5 max-w-md text-base leading-7 text-white/80">
+                  <p className="mt-5 max-w-md text-base leading-7 text-white/75">
                     {slide.description}
                   </p>
-                  <Link
+                  <Button
                     href={slide.ctaHref}
+                    variant="primary"
                     tabIndex={slideIndex === index ? 0 : -1}
-                    className="mt-8 inline-flex h-12 items-center justify-center rounded-md bg-white px-6 text-sm font-semibold uppercase tracking-wide text-zinc-950 transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                    className="mt-8"
                   >
                     {slide.ctaLabel}
-                  </Link>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="pointer-events-none absolute bottom-10 right-6 hidden opacity-90 sm:right-10 sm:block lg:right-16">
+                <div className="pointer-events-auto">
+                  <HeroLogoMark
+                    width={180}
+                    tabIndex={slideIndex === index ? 0 : -1}
+                  />
                 </div>
               </div>
             </div>
@@ -118,7 +135,7 @@ export default function HeroCarousel({ slides }) {
             aria-label={`Ir para slide ${slideIndex + 1}`}
             aria-current={slideIndex === index}
             className={`h-1.5 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
-              slideIndex === index ? "w-6 bg-white" : "w-1.5 bg-white/40"
+              slideIndex === index ? "w-6 bg-brand-yellow" : "w-1.5 bg-white/40"
             }`}
           />
         ))}

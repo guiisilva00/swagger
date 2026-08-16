@@ -16,7 +16,7 @@ export default function CartIcon() {
           ? `Abrir carrinho (${itemCount} ${itemCount === 1 ? "item" : "itens"})`
           : "Abrir carrinho"
       }
-      className="relative flex h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="relative flex h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       <ShoppingBag size={20} strokeWidth={1.6} aria-hidden="true" />
       {itemCount > 0 && (

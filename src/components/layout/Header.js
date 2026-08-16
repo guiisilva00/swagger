@@ -9,6 +9,7 @@ import SearchBar from "./SearchBar";
 import ThemeToggle from "./ThemeToggle";
 import CartIcon from "@/components/cart/CartIcon";
 import Badge from "@/components/ui/Badge";
+import Logo from "@/components/ui/Logo";
 import { useFavorites } from "@/context/FavoritesContext";
 
 export default function Header({ searchIndex = [] }) {
@@ -47,12 +48,12 @@ export default function Header({ searchIndex = [] }) {
             <Menu size={22} strokeWidth={1.6} aria-hidden="true" />
           </button>
 
-          <Link
-            href="/"
-            className="text-xl font-semibold uppercase tracking-[0.2em] text-foreground"
-          >
-            SWAGGER
-          </Link>
+          <Logo
+            variant="color"
+            width={112}
+            priority
+            className="logo-tilt"
+          />
 
           <Nav className="hidden items-center gap-8 md:flex" />
 
@@ -67,7 +68,7 @@ export default function Header({ searchIndex = [] }) {
               aria-label={
                 count > 0 ? `Favoritos (${count})` : "Favoritos"
               }
-              className="relative hidden h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-surface-2 sm:flex"
+              className="relative hidden h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent hover:text-accent-foreground sm:flex"
             >
               <Heart size={19} strokeWidth={1.6} aria-hidden="true" />
               {count > 0 && (
@@ -83,7 +84,7 @@ export default function Header({ searchIndex = [] }) {
             <Link
               href="/conta"
               aria-label="Minha conta"
-              className="hidden h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-surface-2 sm:flex"
+              className="hidden h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent hover:text-accent-foreground sm:flex"
             >
               <User size={20} strokeWidth={1.6} aria-hidden="true" />
             </Link>

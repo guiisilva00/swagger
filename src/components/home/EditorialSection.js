@@ -10,16 +10,16 @@ export default function EditorialSection() {
         alt=""
         fill
         sizes="100vw"
-        className="object-cover object-[50%_25%]"
+        className="object-cover object-[50%_38%]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#1B160D]/90 via-[#1B160D]/35 to-[#1B160D]/10" />
 
       <div className="relative mx-auto w-full max-w-7xl px-6 sm:px-8">
         <div className="max-w-lg">
-          <p className="text-xs uppercase tracking-[0.3em] text-white/70">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-brand-yellow">
             SWAGGER Journal
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h2 className="mt-4 font-display text-4xl uppercase leading-[0.95] tracking-tight text-white sm:text-6xl">
             Moda é identidade.
           </h2>
           <p className="mt-5 max-w-md text-base leading-7 text-white/80">
@@ -29,7 +29,7 @@ export default function EditorialSection() {
           <Button
             href="/produtos"
             variant="secondary"
-            className="mt-8 border-white text-white hover:border-white/70 hover:bg-white/10"
+            className="mt-8 border-2 border-white text-white hover:bg-white hover:text-brand-ink"
           >
             Explorar
           </Button>

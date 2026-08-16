@@ -23,7 +23,7 @@ export default function Nav({ className = "" }) {
           <Link
             key={link.label}
             href={link.href}
-            className="text-sm uppercase tracking-wide text-muted transition-colors hover:text-foreground"
+            className="relative text-sm uppercase tracking-wide text-muted transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-[width] after:duration-200 hover:text-foreground hover:after:w-full"
           >
             {link.label}
           </Link>

@@ -45,3 +45,6 @@ AGENTS.md
 CLAUDE.md
 .claude/
 skills-lock.json
+
+# referências privadas
+/references/

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "@/components/ui/Logo";
 
 const COLUMNS = [
   {
@@ -25,11 +26,9 @@ export default function Footer() {
     <footer className="border-t border-border">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-16 sm:px-8 md:grid-cols-[2fr_1fr_1fr]">
         <div>
-          <p className="text-xl font-semibold uppercase tracking-[0.2em] text-foreground">
-            SWAGGER
-          </p>
+          <Logo variant="color" width={128} />
           <p className="mt-4 max-w-xs text-sm leading-6 text-muted">
-            Moda que representa você.
+            Street is an attitude.
           </p>
         </div>
 
@@ -43,7 +42,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted transition-colors hover:text-foreground"
+                    className="relative text-sm text-muted transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-[width] after:duration-200 hover:text-foreground hover:after:w-full"
                   >
                     {link.label}
                   </Link>
@@ -54,7 +53,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="border-t border-border px-6 py-6 text-center text-xs text-subtle sm:px-8">
+      <div className="border-t border-border px-6 py-6 text-center text-xs uppercase tracking-wide text-subtle sm:px-8">
         © {new Date().getFullYear()} SWAGGER. Todos os direitos reservados.
       </div>
     </footer>

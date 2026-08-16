@@ -33,10 +33,12 @@ export default function BenefitsBar() {
               size={22}
               strokeWidth={1.4}
               aria-hidden="true"
-              className="mt-0.5 shrink-0 text-foreground"
+              className="mt-0.5 shrink-0 text-accent"
             />
             <div>
-              <p className="text-sm font-medium text-foreground">{title}</p>
+              <p className="text-sm font-semibold uppercase tracking-wide text-foreground">
+                {title}
+              </p>
               <p className="mt-0.5 text-xs text-muted">{description}</p>
             </div>
           </div>

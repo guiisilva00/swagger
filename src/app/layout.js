@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Anton } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import TopBar from "@/components/layout/TopBar";
@@ -20,17 +20,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const anton = Anton({
+  variable: "--font-anton",
+  weight: "400",
+  subsets: ["latin"],
+});
+
 export const metadata = {
   title: {
-    default: "SWAGGER — Moda que representa você.",
+    default: "SWAGGER — Street is an attitude.",
     template: "%s | SWAGGER",
   },
   description:
-    "SWAGGER é uma loja de moda que representa quem você é. Descubra roupas e acessórios para o seu estilo.",
+    "SWAGGER é uma marca de streetwear urbano e ousado. Descubra roupas e acessórios com identidade de rua.",
   openGraph: {
-    title: "SWAGGER — Moda que representa você.",
+    title: "SWAGGER — Street is an attitude.",
     description:
-      "SWAGGER é uma loja de moda que representa quem você é. Descubra roupas e acessórios para o seu estilo.",
+      "SWAGGER é uma marca de streetwear urbano e ousado. Descubra roupas e acessórios com identidade de rua.",
     siteName: "SWAGGER",
     locale: "pt_BR",
     type: "website",
@@ -54,7 +60,7 @@ export default async function RootLayout({ children }) {
     <html
       lang="pt-BR"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>

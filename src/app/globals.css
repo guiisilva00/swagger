@@ -2,52 +2,52 @@
 
 /* Light theme (default) */
 :root {
-  --background: #fafafa;
+  --background: #f9faf8;
   --surface: #ffffff;
-  --surface-2: #f4f4f5;
-  --foreground: #18181b;
-  --muted: #52525b;
-  --subtle: #a1a1aa;
-  --border: #e4e4e7;
-  --border-strong: #d4d4d8;
-  --accent: #18181b;
-  --accent-foreground: #fafafa;
-  --overlay: rgb(0 0 0 / 0.5);
-  --ring: #18181b;
+  --surface-2: #f1f1ee;
+  --foreground: #1b160d;
+  --muted: #5c584d;
+  --subtle: #8a877c;
+  --border: #e2e0da;
+  --border-strong: #b4b8b6;
+  --accent: #f6ed21;
+  --accent-foreground: #1b160d;
+  --overlay: rgb(27 22 13 / 0.55);
+  --ring: #f6ed21;
 }
 
 /* System preference, only when the user hasn't made an explicit choice yet */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --background: #0a0a0b;
-    --surface: #17171a;
-    --surface-2: #1e1e22;
-    --foreground: #f4f4f5;
-    --muted: #a1a1aa;
-    --subtle: #71717a;
-    --border: #27272a;
-    --border-strong: #3f3f46;
-    --accent: #f4f4f5;
-    --accent-foreground: #0a0a0b;
+    --background: #1b160d;
+    --surface: #241d12;
+    --surface-2: #332a1c;
+    --foreground: #f9faf8;
+    --muted: #b4b8b6;
+    --subtle: #7d7a6f;
+    --border: rgb(180 184 182 / 0.16);
+    --border-strong: rgb(180 184 182 / 0.32);
+    --accent: #f6ed21;
+    --accent-foreground: #1b160d;
     --overlay: rgb(0 0 0 / 0.7);
-    --ring: #a1a1aa;
+    --ring: #f6ed21;
   }
 }
 
 /* Explicit user choice always wins over system preference */
 [data-theme="dark"] {
-  --background: #0a0a0b;
-  --surface: #17171a;
-  --surface-2: #1e1e22;
-  --foreground: #f4f4f5;
-  --muted: #a1a1aa;
-  --subtle: #71717a;
-  --border: #27272a;
-  --border-strong: #3f3f46;
-  --accent: #f4f4f5;
-  --accent-foreground: #0a0a0b;
+  --background: #1b160d;
+  --surface: #241d12;
+  --surface-2: #332a1c;
+  --foreground: #f9faf8;
+  --muted: #b4b8b6;
+  --subtle: #7d7a6f;
+  --border: rgb(180 184 182 / 0.16);
+  --border-strong: rgb(180 184 182 / 0.32);
+  --accent: #f6ed21;
+  --accent-foreground: #1b160d;
   --overlay: rgb(0 0 0 / 0.7);
-  --ring: #a1a1aa;
+  --ring: #f6ed21;
 }
 
 @theme inline {
@@ -63,8 +63,17 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-overlay: var(--overlay);
   --color-ring: var(--ring);
+
+  /* Raw brand constants — deliberately do NOT flip with the theme toggle */
+  --color-brand-yellow: #f6ed21;
+  --color-brand-olive: #cabc56;
+  --color-brand-ink: #1b160d;
+  --color-brand-fog: #b4b8b6;
+  --color-brand-paper: #f9faf8;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-anton);
 }
 
 body {
@@ -105,6 +114,45 @@ body {
 
 .animate-pulse-scale {
   animation: pulse-scale 0.35s ease-out;
+}
+
+/*
+  Logo motion — the wordmark ships with a wireframe-globe motif already
+  wrapped around it, so rotation reads as an extension of the mark itself
+  rather than a bolted-on gimmick. Kept to three narrow, purposeful cases:
+  a subtle header tilt, a one-time hero entrance, and a hero hover/tap spin.
+*/
+@keyframes logo-spin-in {
+  from {
+    opacity: 0;
+    transform: rotate(-18deg) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.logo-spin-in {
+  animation: logo-spin-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.logo-tilt {
+  transition: transform 0.2s ease-out;
+}
+
+.logo-tilt:hover,
+.logo-tilt:focus-visible {
+  transform: rotate(8deg) scale(1.04);
+}
+
+.logo-spin-hover {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.logo-spin-hover:hover,
+.logo-spin-hover.is-spinning {
+  transform: rotate(360deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
